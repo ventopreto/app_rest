@@ -5,6 +5,17 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    expose:
+      - "5672"
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
   web:
     tty: true
     stdin_open: true
@@ -12,7 +23,12 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes:
       - .:/myapp
+      - gems_cache:/usr/local/bundle
     ports:
       - "3001:3001"
     depends_on:
       - db
+      - rabbitmq
+
+volumes:
+  gems_cache:
