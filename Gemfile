@@ -13,6 +13,7 @@ group :development, :test do
   gem "standard-rails"
   gem "pry-byebug"
   gem "rspec-rails", "~> 4.1.2"
+  gem "ruby-lsp"
 end
 
 group :development do
