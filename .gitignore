@@ -31,4 +31,6 @@ storage
 coverage
 vendor
 tmp
+.vscode
 public
+.env
