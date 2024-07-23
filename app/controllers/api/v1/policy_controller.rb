@@ -5,9 +5,22 @@ class Api::V1::PolicyController < ApplicationController
   rescue_from JWT::VerificationError, with: :invalid_token
   rescue_from JWT::ExpiredSignature, with: :expiration_error
 
+  def index
+    @policies = []
+    Policy.all.find_each do |policy|
+      @policies << policy(policy)
+    end
+
+    if @policies.present? && @policies.count > 0
+      render json: {payload: @policies}, status: :ok
+    else
+      render json: {payload: "Não existe nenhuma Apolice"}, status: :ok
+    end
+  end
+
   def show
     @policy = Policy.find(params[:id])
-    render json: {payload: policy}, status: :ok if @policy.present?
+    render json: {payload: policy(@policy)}, status: :ok if @policy.present?
   end
 
   private
@@ -16,20 +29,20 @@ class Api::V1::PolicyController < ApplicationController
     render plain: "404 Not Found", status: :not_found
   end
 
-  def policy
+  def policy(policy)
     {
-      policy_id: @policy.id,
-      start_date_coverage: @policy.start_date_coverage,
-      end_date_coverage: @policy.end_date_coverage,
+      policy_id: policy.id,
+      start_date_coverage: policy.start_date_coverage,
+      end_date_coverage: policy.end_date_coverage,
       insured: {
-        name: @policy.insured.name,
-        cpf: @policy.insured.cpf
+        name: policy.insured.name,
+        cpf: policy.insured.cpf
       },
       vehicle: {
-        brand: @policy.vehicle.brand,
-        model: @policy.vehicle.model,
-        year: @policy.vehicle.year,
-        registration_plate: @policy.vehicle.registration_plate
+        brand: policy.vehicle.brand,
+        model: policy.vehicle.model,
+        year: policy.vehicle.year,
+        registration_plate: policy.vehicle.registration_plate
       }
     }
   end

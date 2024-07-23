@@ -31,4 +31,5 @@ gem "bunny", ">= 2.19.0"
 
 group :test do
   gem "bunny-mock"
+  gem 'database_cleaner-active_record'
 end
