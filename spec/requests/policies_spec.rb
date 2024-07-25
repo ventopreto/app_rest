@@ -28,15 +28,15 @@ RSpec.describe "Policy", type: :request do
 
         it "return a policy" do
           get "/api/v1/policy/#{policy.id}"
-          expect(parsed_response[:payload][:policy_id]).to eq(policy.id)
-          expect(parsed_response[:payload][:start_date_coverage]).to eq("1974-05-30")
-          expect(parsed_response[:payload][:end_date_coverage]).to eq("2030-05-30")
-          expect(parsed_response[:payload][:insured][:name]).to eq(mad_max.name)
-          expect(parsed_response[:payload][:insured][:cpf]).to eq(mad_max.cpf)
-          expect(parsed_response[:payload][:vehicle][:brand]).to eq(interceptor.brand)
-          expect(parsed_response[:payload][:vehicle][:model]).to eq(interceptor.model)
-          expect(parsed_response[:payload][:vehicle][:year]).to eq(interceptor.year)
-          expect(parsed_response[:payload][:vehicle][:registration_plate]).to eq(interceptor.registration_plate)
+          expect(parsed_response[:policy_id]).to eq(policy.id)
+          expect(parsed_response[:start_date_coverage]).to eq("1974-05-30")
+          expect(parsed_response[:end_date_coverage]).to eq("2030-05-30")
+          expect(parsed_response[:insured][:name]).to eq(mad_max.name)
+          expect(parsed_response[:insured][:cpf]).to eq(mad_max.cpf)
+          expect(parsed_response[:vehicle][:brand]).to eq(interceptor.brand)
+          expect(parsed_response[:vehicle][:model]).to eq(interceptor.model)
+          expect(parsed_response[:vehicle][:year]).to eq(interceptor.year)
+          expect(parsed_response[:vehicle][:registration_plate]).to eq(interceptor.registration_plate)
         end
       end
 
@@ -95,7 +95,7 @@ RSpec.describe "Policy", type: :request do
 
         it "return a list of policies" do
           get "/api/v1/policy"
-          expect(parsed_response[:payload].count).to eq(2)
+          expect(parsed_response.count).to eq(2)
         end
       end
 
@@ -107,7 +107,7 @@ RSpec.describe "Policy", type: :request do
 
         it "return an error" do
           get "/api/v1/policy"
-          expect(parsed_response[:payload]).to eq("Não existe nenhuma Apolice")
+          expect(response.body).to eq("Não existe nenhuma Apolice")
         end
       end
     end
