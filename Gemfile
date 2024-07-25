@@ -10,6 +10,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "devise"
 gem "devise-jwt"
 gem "dotenv"
+gem "active_model_serializers"
 
 group :development, :test do
   gem "standard"
@@ -31,4 +32,5 @@ gem "bunny", ">= 2.19.0"
 
 group :test do
   gem "bunny-mock"
+  gem "database_cleaner-active_record"
 end

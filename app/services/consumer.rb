@@ -24,7 +24,7 @@ class Consumer
       puts " [*] Waiting for logs. To exit press CTRL+C"
 
       begin
-        queue.subscribe(block: true) do |_delivery_info, _properties, body|
+        queue.subscribe(manual_ack: true, block: true) do |_delivery_info, _properties, body|
           puts " [x] Received: #{body}"
           parsed_body = JSON.parse(body)
 
@@ -46,6 +46,7 @@ class Consumer
             insured_id: insured.id,
             vehicle_id: vehicle.id
           )
+          channel.ack(_delivery_info.delivery_tag)
         end
       rescue Interrupt => _
         channel.close
