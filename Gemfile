@@ -29,6 +29,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Rabbit
 gem "bunny", ">= 2.19.0"
+gem "sneakers"
 
 group :test do
   gem "bunny-mock"
