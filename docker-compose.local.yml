@@ -10,6 +10,9 @@ services:
   rabbitmq:
     networks:
       - public
+  redis:
+    networks:
+      - public
 
 networks:
   public:

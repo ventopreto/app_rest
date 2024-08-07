@@ -204,6 +204,7 @@ GEM
     rbs (3.5.1)
       logger
     rbtree (0.4.6)
+    redis (4.8.1)
     regexp_parser (2.9.2)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -326,6 +327,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 5.0)
   rails (~> 6.1.7, >= 6.1.7.8)
+  redis (~> 4.0)
   rspec-rails (~> 4.1.2)
   ruby-lsp
   sneakers
