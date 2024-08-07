@@ -11,6 +11,7 @@ gem "devise"
 gem "devise-jwt"
 gem "dotenv"
 gem "active_model_serializers"
+gem "redis", "~> 4.0"
 
 group :development, :test do
   gem "standard"
